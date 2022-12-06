@@ -4,21 +4,29 @@ import styled from 'styled-components';
 import CommentList from '../list/CommentList';
 import TextInput from '../ui/TextInput';
 import Button from '../ui/Button';
-import data from '../../data.json'
+import data from '../../../data.json'
 
 const Wrapper = styled.div`
-    padding: 16px;
-    background: lightgrey;
+    padding: 0 20px;
 `;
 
 const Container = styled.div`
-    max-width: 70%;
+    padding: 20px;
+    width: 100%;
+    background: lightgrey;
+    box-sizing: border-box;
 `;
 
 const PostContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: cneter;
+    width: 100%;
     border: 1px solid gray;
     padding: 16px 12px;
     margin-top: 20px;
+    background-color: white;
+    box-sizing: border-box;
 `;
 const TitleText = styled.div`
     font-weight: 700;
@@ -44,11 +52,7 @@ function PostViewPage() {
         <Wrapper>
             <Container>
 
-                <Button
-                    onClick={()=>{ 
-                        navigate('/')
-                    }}
-                >뒤로가기</Button>
+                <Button onClick={()=>{ navigate('/') }} >뒤로가기</Button>
 
                 <PostContainer>
                     <TitleText>{ post.title }</TitleText>
@@ -66,11 +70,13 @@ function PostViewPage() {
                     }}
                 ></TextInput> 
 
-                <Button
+                <div style={{marginTop: '20px', textAlign: 'center'}}>
+                <Button size='medium'
                     onClick={()=>{ 
                         navigate('/')
                     }}
                 >글 작성하기</Button>
+                </div>
             </Container>
         </Wrapper>
     )

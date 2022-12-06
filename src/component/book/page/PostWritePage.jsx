@@ -5,12 +5,18 @@ import TextInput from '../ui/TextInput';
 import Button from '../ui/Button';
 
 const Wrapper = styled.div`
-    padding: 16px;
-    background: lightgrey;
+    padding: 0 20px;
 `;
 
 const Container = styled.div`
-    max-width: 70%;
+    padding: 20px;
+    background: lightgrey;
+`;
+
+const ButtonGroup = styled.div`
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 20px;
 `;
 
 function PostWritePage(props) { 
@@ -38,11 +44,9 @@ function PostWritePage(props) {
                     }}
                 ></TextInput> 
 
-                <Button
-                    onClick={()=>{ 
-                        navigate('/')
-                    }}
-                >글 작성하기</Button>
+                <ButtonGroup>
+                    <Button onClick={()=>{ navigate('/') }} >글 작성하기</Button>
+                </ButtonGroup>
             </Container>
         </Wrapper>
     )

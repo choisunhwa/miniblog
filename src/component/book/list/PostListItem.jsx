@@ -10,11 +10,10 @@ const Wrapper = styled.button`
 const TitleText = styled.p`
     font-size: 20px;
     font-weight: 700;
-`
-
-function PostListItem({ post, onClick}) { 
+`;
+function PostListItem({ post, onClickItemList}) { 
     return (
-        <Wrapper onClick={onClick}>
+        <Wrapper onClick={onClickItemList}>
             <TitleText>{ post.title }</TitleText>
         </Wrapper>
     )
@@ -28,5 +27,4 @@ PostListItem.propTypes = {
 
 PostListItem.defaultProps = {
     post: {title:'title'}
-
 }
