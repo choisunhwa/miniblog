@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import Styled from 'styled-components';
 import PropTypes from 'prop-types';
 
@@ -12,12 +12,27 @@ const StyledTextarea = Styled.textarea`
     ${(props) => props.height && `height: ${props.height}`}
 `;
 
-function TextInput({ height }) { 
+function TextInput({ height, isFocus}) {
+    const [textValue, setTextValue] = useState();
+    
+    function handleChange() {
+        setTextValue(textValue);    
+    };
+    
+    const inputElem = useRef(null);
+    useEffect(() => {
+        if (isFocus === true) {
+            inputElem.current.focus();
+        } else if (isFocus === false) {
+            console.log(inputElem)
+        }
+    }, [isFocus]);
+
     return (
-        <StyledTextarea height={height}></StyledTextarea>
+        <StyledTextarea ref={inputElem} value={textValue} onChange={handleChange} height={height}></StyledTextarea>
     )
 }
-
+ 
 export default TextInput;
 
 TextInput.propTypes = {

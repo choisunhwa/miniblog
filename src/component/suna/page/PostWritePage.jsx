@@ -27,8 +27,8 @@ function PostWritePage() {
             <ArticleTitle>미니 블로그 혼자 만들기</ArticleTitle>
 
             <StyledContainer>
-                <TextInput></TextInput>
-                <TextInput height={'500px'}></TextInput>
+                <TextInput isFocus={true}></TextInput>
+                <TextInput isFocus={false} height={'500px'}></TextInput>
             </StyledContainer>
 
             <ButtonGroup mt={ '20px'} variant='secondary' size='full' onClickHandler={onClickHandler}>글작성하기</ButtonGroup>

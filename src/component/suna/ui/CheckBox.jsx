@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useReducer} from 'react';
 import PropTypes from 'prop-types';
 import Styled from 'styled-components';
 
@@ -51,24 +51,38 @@ const StyledLabel = Styled.label`
     }
 `;
 
-function CheckBox({id, subTextValue, children, handleChange}) { 
-    let [isChecked, setChecked] = useState(false);
+function CheckBox({id, subTextValue, children}) { 
     let [subText, setSubText] = useState('');
-
-    const handleClick = (event) => {
-        setChecked(event.target.checked);
-    };
-
+    
+    const [state, dispatch] = useReducer(
+        //reducer
+        (state, action) => { 
+            if (action.isChecked) {
+                setSubText(subTextValue[0]);
+            } else if(!action.isChecked){ 
+                setSubText(subTextValue[1]);
+            }
+            return {
+                ...action,
+            }
+        }
+        // ({ 
+        //     ...state,
+        //     ...action,
+        // })
+        , {
+            isChecked: false,
+            isSubText: false,
+        }
+    );
+    
     useEffect(() => {
         let TF = Boolean(subTextValue);
 
-        if (TF && isChecked) {
-            setSubText(subTextValue[0]);
-        } else if (TF && !isChecked) {
+        if (TF) {
             setSubText(subTextValue[1]);
         }
-
-    }, [isChecked, subTextValue]);
+    }, [subTextValue]);
 
     return (
         <UIInputWrapper>
@@ -76,9 +90,8 @@ function CheckBox({id, subTextValue, children, handleChange}) {
                 <StyledInput
                     type='checkbox'
                     id={id}
-                    checked={isChecked}
-                    onClick={handleClick}
-                    onChange={handleChange}
+                    checked={state.isChecked}
+                    onChange={(e)=>dispatch({isChecked: e.target.checked})}
                 ></StyledInput>
                 <StyledLabel htmlFor={id}>{children}</StyledLabel>
             </InputWrapper> 

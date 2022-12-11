@@ -11,7 +11,6 @@ function AppSuna() {
     return (
         <div className='AppSuna'>
             <CheckBox id="checkbox01" subTextValue={ subTextValue }></CheckBox>
-            <CheckBox ></CheckBox>
 
             <BrowserRouter>
 				<Routes>
