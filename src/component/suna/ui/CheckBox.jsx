@@ -1,4 +1,5 @@
-import React, {useState, useEffect, useReducer} from 'react';
+// import React, {useState, useEffect, useReducer} from 'react';
+import React, {useState, useReducer} from 'react';
 import PropTypes from 'prop-types';
 import Styled from 'styled-components';
 
@@ -51,20 +52,24 @@ const StyledLabel = Styled.label`
     }
 `;
 
+
 function CheckBox({id, subTextValue, children}) { 
     let [subText, setSubText] = useState('');
     
+    function init(initialValue) { 
+        setSubText(subTextValue[1]);
+        return { ...initialValue}
+    }
+
     const [state, dispatch] = useReducer(
-        //reducer
+        //reducer 
         (state, action) => { 
             if (action.isChecked) {
                 setSubText(subTextValue[0]);
             } else if(!action.isChecked){ 
                 setSubText(subTextValue[1]);
             }
-            return {
-                ...action,
-            }
+            return {...action}
         }
         // ({ 
         //     ...state,
@@ -73,16 +78,19 @@ function CheckBox({id, subTextValue, children}) {
         , {
             isChecked: false,
             isSubText: false,
+            isSubTextValue: Boolean(subTextValue)
         }
+        , init
     );
     
-    useEffect(() => {
-        let TF = Boolean(subTextValue);
+    // 체크박스 초기 설정
+    // useEffect(() => {
+    //     let TF = Boolean(subTextValue);
 
-        if (TF) {
-            setSubText(subTextValue[1]);
-        }
-    }, [subTextValue]);
+    //     if (TF) {
+    //         setSubText(subTextValue[1]);
+    //     }
+    // }, [subTextValue]);
 
     return (
         <UIInputWrapper>
